@@ -12,10 +12,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${environment.apiBaseUrl}/auth/login`, { email, password }).pipe(
+  login(email: string, password: string): Observable<{ token: string; role: string }> {
+    return this.http.post<{ token: string; role: string }>(`${environment.apiBaseUrl}/auth/login`, { email, password }).pipe(
       tap(response => {
-        localStorage.setItem(this.tokenKey, response.token);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role); // Stocker le rôle
       })
     );
   }
@@ -31,4 +32,12 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey); 
   }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  isAdmin(): boolean {
+  return this.getUserRole() === 'ADMIN';
+}
 }

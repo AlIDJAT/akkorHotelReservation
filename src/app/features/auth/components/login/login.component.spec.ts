@@ -67,7 +67,7 @@ describe('LoginComponent', () => {
 
   it('should login successfully and navigate to /dashboard', () => {
     // On simule une réponse de succès
-    authServiceSpy.login.and.returnValue(of({ token: 'fake-token' }));
+    authServiceSpy.login.and.returnValue(of({ token: 'fake-token', role: 'user' }));
 
     // On rend le formulaire valide
     component.loginForm.setValue({ email: 'test@example.com', password: 'secret' });
