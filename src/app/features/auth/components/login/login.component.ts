@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,24 +17,23 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) {}
 
   onLogin() {
     if (this.loginForm.valid) {
-      this.isLoading = true; // Désactiver le bouton pendant la requête
+      this.isLoading = true;
       const { email, password } = this.loginForm.value;
       
       this.authService.login(email!, password!).subscribe({
         next: (res) => {
-          console.log('Login successful', res);
+          this.isLoading = false;
           this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-          this.isLoading = false;
+          this.router.navigate(['/dashboard']); // Redirection après connexion
         },
-        error: (err) => {
-          console.error('Login failed', err);
+        error: () => {
+          this.isLoading = false;
           this.snackBar.open('Invalid credentials', 'Close', { duration: 3000 });
-          this.isLoading = false;
-        },
+        }
       });
     }
   }
