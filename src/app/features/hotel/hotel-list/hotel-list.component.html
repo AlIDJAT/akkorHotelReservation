@@ -1,0 +1,38 @@
+<div class="hotel-list-container">
+    <h2>List of Hotels</h2>
+  
+    <div *ngIf="isLoading">Loading hotels...</div>
+  
+    <!-- Bouton "Add Hotel" visible seulement si admin -->
+    <button mat-raised-button color="accent" *ngIf="isAdmin()" (click)="onEditHotel(0)">
+      Create new Hotel
+    </button>
+  
+    <div class="card-grid">
+      <mat-card class="hotel-card" *ngFor="let hotel of hotels">
+        <mat-card-title>{{ hotel.name }}</mat-card-title>
+        <mat-card-content>
+          {{ hotel.description }}
+        </mat-card-content>
+        <mat-card-content>
+          {{ hotel.location }}
+        </mat-card-content>
+  
+        <mat-card-actions>
+          <!-- Si admin, afficher "Modifier" et "Supprimer" -->
+          <button mat-button color="primary" *ngIf="isAdmin()" (click)="onEditHotel(hotel.id!)">
+            Edit
+          </button>
+          <button mat-button color="warn" *ngIf="isAdmin()" (click)="onDeleteHotel(hotel.id!)">
+            Delete
+          </button>
+  
+          <!-- Si non-admin (ou tout le monde), un bouton "Réserver" -->
+          <button mat-button color="primary" (click)="onReserveHotel(hotel.id!)">
+            Réserver
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+</div>
+  

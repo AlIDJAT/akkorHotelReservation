@@ -1,0 +1,48 @@
+.global-toolbar {
+  position: fixed;         /* On la fixe en haut */
+  top: 0; left: 0; right: 0;
+  z-index: 2;             /* Au-dessus du reste */
+  display: flex;
+  align-items: center;
+
+  .title {
+    margin-left: 8px;
+    font-weight: bold;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+/* Le conteneur sous la toolbar occupe tout l'écran - la toolbar fait 64px de haut (par défaut Material) */
+.layout-container {
+  height: calc(100vh - 64px); /* On enlève la hauteur de la toolbar */
+  margin-top: 64px;           /* On décale le container en dessous de la toolbar */
+}
+
+/* Style de la side nav */
+.side-nav {
+  width: 240px; /* largeur de la barre latérale */
+}
+
+/* On peut styliser la toolbar du menu (dans la side nav) */
+.menu-toolbar {
+  height: 64px; /* même hauteur que la barre du haut, pour cohérence */
+}
+
+/* Contenu principal */
+.main-content {
+  padding: 16px;
+}
+
+/* Ex. stats-container */
+.stats-container {
+  h3 {
+    margin-bottom: 4px;
+  }
+  p {
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+  }
+}

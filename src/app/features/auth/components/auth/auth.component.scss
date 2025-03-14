@@ -1,0 +1,13 @@
+.auth-container {
+    display: flex;
+    justify-content: center;   /* centre horizontalement */
+    align-items: center;       /* centre verticalement (si le parent a une hauteur fixe) */
+    min-height: 80vh;          /* par exemple, pour “descendre” le formulaire */
+  }
+  
+  .auth-card {
+    width: 500px;              /* limite la largeur à 500px */
+    padding: 24px;             /* un peu d'espace intérieur */
+    margin-top: 20px;          /* si vous voulez un écart par rapport au haut de la page */
+  }
+  

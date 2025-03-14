@@ -9,7 +9,7 @@ export interface User {
   email: string;
   pseudo: string;
   password?: string;
-  role?: 'USER' | 'ADMIN';
+  role?: string;
 }
 
 @Injectable({
@@ -38,5 +38,10 @@ export class UserService {
   // DELETE /users/{id}
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  // GET /users - liste des utilisateurs
+  listUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl);
   }
 }

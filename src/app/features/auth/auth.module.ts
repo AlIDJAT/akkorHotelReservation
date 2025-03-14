@@ -7,12 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { AuthComponent } from './components/auth/auth.component';
+
+
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,6 +22,7 @@ import { RegisterComponent } from './components/register/register.component';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    AuthComponent
   ]
 })
 export class AuthModule { }

@@ -12,17 +12,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { AuthModule } from './features/auth/auth.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent,
     // ...
   ],
   imports: [
+    CommonModule ,
     BrowserModule,
     HttpClientModule,
-    AuthModule
-   
+    RouterModule ,
+    AppRoutingModule,
+    HttpClientModule, 
+    AppComponent  ,
+    BrowserAnimationsModule,
+    AppComponent
   ],
   providers: [
     AuthService,
@@ -32,6 +39,6 @@ import { AuthModule } from './features/auth/auth.module';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule {}

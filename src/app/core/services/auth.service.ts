@@ -4,33 +4,43 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../environements/environment';
 import { tap } from 'rxjs';
 
+export interface LoginResponse {
+  token: string;
+  role: string;
+  pseudo: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private tokenKey = 'auth_token';
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<{ token: string; role: string }> {
-    return this.http.post<{ token: string; role: string }>(`${environment.apiBaseUrl}/auth/login`, { email, password }).pipe(
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/auth/login`, { email, password }).pipe(
       tap(response => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('role', response.role); // Stocker le rôle
+        console.log("Role reçu:", response.role);
+        localStorage.setItem(this.tokenKey, response.token);
+        localStorage.setItem('role', response.role);       // Stocker le rôle
+        localStorage.setItem('pseudo', response.pseudo);     // Stocker le pseudo
       })
     );
   }
 
   logout(): void {
-    localStorage.removeItem(this.tokenKey); 
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem('role');
+    localStorage.removeItem('pseudo');
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.tokenKey); 
+    return !!localStorage.getItem(this.tokenKey);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey); 
+    return localStorage.getItem(this.tokenKey);
   }
 
   getUserRole(): string | null {
@@ -38,6 +48,10 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-  return this.getUserRole() === 'ADMIN';
-}
+    return this.getUserRole() === 'ADMIN';
+  }
+
+  getUserPseudo(): string | null {
+    return localStorage.getItem('pseudo');
+  }
 }

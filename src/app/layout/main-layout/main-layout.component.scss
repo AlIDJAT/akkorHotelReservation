@@ -1,0 +1,33 @@
+.top-toolbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+
+  .title {
+    margin-left: 8px;
+    font-weight: bold;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+/* Le conteneur principal est décalé en dessous de la toolbar (64px de haut par défaut) */
+.layout-container {
+  height: calc(100vh - 64px);
+  margin-top: 64px;
+}
+
+.side-nav {
+  width: 240px; /* largeur de la barre latérale */
+}
+
+.menu-toolbar {
+  height: 64px; /* cohérence avec la toolbar du haut */
+}
+
+.main-content {
+  padding: 16px;
+}

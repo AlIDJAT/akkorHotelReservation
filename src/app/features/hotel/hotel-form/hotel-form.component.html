@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-title>
+    {{ isEditMode ? 'Edit Hotel' : 'Create New Hotel' }}
+  </mat-card-title>
+
+  <form [formGroup]="hotelForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="hotelForm.get('name')?.invalid && hotelForm.get('name')?.touched">
+        Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- NOUVEAU CHAMP LOCATION -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location">
+      <mat-error *ngIf="hotelForm.get('location')?.invalid && hotelForm.get('location')?.touched">
+        Location is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      <mat-error *ngIf="hotelForm.get('description')?.invalid && hotelForm.get('description')?.touched">
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="hotelForm.invalid">
+      {{ isEditMode ? 'Update Hotel' : 'Create Hotel' }}
+    </button>
+  </form>
+</mat-card>

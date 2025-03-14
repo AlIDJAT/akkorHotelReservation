@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 export interface Hotel {
   id?: number;
   name: string;
+  location: string;
   description: string;
   // autres champs...
 }
